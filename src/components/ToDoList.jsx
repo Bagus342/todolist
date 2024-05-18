@@ -1,15 +1,25 @@
 import React from 'react'
+import { Checkbox, List, ListItem, ListItemButton, ListItemIcon, ListItemText } from '@mui/material'
 
-const ToDoList = ({ todo }) => {
+const ToDoList = ({ todo, handleCheckBox }) => {
     return (
-        <div >
-            <ul>
+        <div>
+            <List>
                 {todo.map((todo, index) => {
                     return (
-                        <li key={index}>{todo}</li>
+                        <ListItem key={index} disablePadding>
+                            <ListItemButton>
+                                <ListItemIcon>
+                                    <Checkbox onChange={() => {
+                                        handleCheckBox(index + 1)
+                                    }} disableRipple />
+                                </ListItemIcon>
+                                <ListItemText primary={todo.task} className={todo.complete ? "completed" : ""} />
+                            </ListItemButton>
+                        </ListItem>
                     )
                 })}
-            </ul>
+            </List>
         </div>
     )
 }
